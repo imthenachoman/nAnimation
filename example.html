@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+    <head>
+        <script type="text/javascript" src="nAnimation.1.0.min.js"></script>
+        <script type="text/javascript">
+            function init()
+            {
+                var easingFunctions = nAnimate.easingFunctions();
+                var table = document.getElementById("table");
+                
+                for(var i = 0; i < easingFunctions.length; ++i)
+                {
+                    table.innerHTML += "<tr><th><a href='#' onclick='animateRow(this); return false;'>" + easingFunctions[i] + "</a></th><td style='width: 100%;'><div class='box'></div></td></tr>";
+                }
+            }
+            
+            function animateAllRows()
+            {
+                var rows = document.getElementById("table").rows;
+                var toAnimate = {};
+                for(var i = 0; i < rows.length; ++i)
+                {
+                    var easingFunction = rows[i].cells[0].innerText;
+                    var div = rows[i].cells[1].querySelector(".box");
+                    div.style.width = "0%";
+                    toAnimate[easingFunction] = div;
+                }
+                
+                for(i in toAnimate)
+                {
+                    animateBox(toAnimate[i], i);
+                }
+            }
+            
+            function animateBox(div, easingFunction)
+            {
+                nAnimate.start(1000, function(rate)
+                {
+                    div.style.width = (rate * 100) + "%";
+                }, easingFunction);
+            }
+            
+            function animateRow(a)
+            {
+                var easingFunction = a.innerText;
+                var div = a.parentNode.nextSibling.children[0];
+                div.style.width = "0%";
+                animateBox(div, easingFunction);
+            }
+        </script>
+        <style type="text/css">
+            table
+            {
+                width: 75%;
+            }
+            .box
+            {
+                width: 0%;
+                height: 20px;
+                background-color: red;
+            }
+        </style>
+    </head>
+    <body onload="init()">
+        <input type="button" style="width: 100%;" onclick="animateAllRows()" value="animate all rows"></input>
+        <br /><br />
+        <table border="1"><tbody id="table"></tbody></table>
+    </body>
+</html>
