@@ -3,7 +3,7 @@ generic javascript animation library
 
 ## Overview
 
-I needed a generic animation wrapper so I created `nAnimation`. All it does is pull from various libraries that already exist online.
+I needed a generic animation wrapper so I created `nAnimation`. I know there are plenty of existing ones but I needed/wanted something simpler. All it does is pull from various libraries that already exist online.
 
  1. requestAnimationFrame from https://gist.github.com/paulirish/1579671
  2. a cool animation wrapper by Dmitri Lau (http://www.sitepoint.com/simple-animations-using-requestanimationframe/)
