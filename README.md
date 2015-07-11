@@ -1,6 +1,16 @@
 # nAnimation
 generic javascript animation library
 
+## Table of Contents
+
+ 1. [Overview](#overview)
+ 2. [Credits](#credits)
+ 3. [How To Use](#how-to-use)
+	 1. [To Start An Animation](#to-start-an-animation)
+	 2. [To End An Animation](#to-end-an-animation)
+	 3. [To Get An Array Of The Available Easing Functions](#to-get-an-array-of-the-available-easing-functions)
+ 4. [Example](#example)
+
 ## Overview
 
 There are a lot of great JavaScript animation libraries but all of them were either too complex or bulky for my needs. They all offered a host/slew of features that I didn't need. So I set out to write something simpler for myself. I ended up with `nAnimation`.
@@ -36,7 +46,7 @@ For example:
         element.style.height = 100 + (rate * 200) + "px";
     }, "easeInQuart");
   
-### To Start An Animation
+### To End An Animation
 
 `nAnimate.start` will return an `ID`. Use the `ID` to cancel.
 
