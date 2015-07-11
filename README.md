@@ -15,7 +15,7 @@ generic javascript animation library
 
 There are a lot of great JavaScript animation libraries but all of them were either too complex or bulky for my needs. They all offered a host/slew of features that I didn't need. So I set out to write something simpler for myself. I ended up with `nAnimation`.
 
-In actuallity, it doesn't really do any kind of animation. All it does is let you run a **function** an **X** # of times for a **Y** duration using an **optional easing function**. The function can then do whatever you need/want. At each frame/call the function is passed one paramater: a `rate`. The `rate` is a number between `0` and `1` and represents the `% complete` for each frame/call. (However, it is possible that some of the easing functions will result in a number larger then 1 during the duration.) The rate will always be `0` at the first frame/call and 1 at the last frame/call.
+`nAnimation` doesn't really do any kind of animation; it lets you run a **function** an **X** # of times for a **Y** duration using an **optional easing function**. The function is called on each frame and can do whatever you need/want. At each frame/call the function is passed one paramater: a `rate`. The `rate` is a number between `0` and `1` and represents the `% complete` for each frame/call. (However, it is possible that some of the easing functions will result in a number larger then 1 during the duration.) The rate will always be `0` at the first frame/call and 1 at the last frame/call.
 
 You can, in turn, use `rate` to do anything, including animations. For example, if the function sets the width of an element to be `rate * width` then the element will grow from `0` to `width` over the duration.
 
@@ -26,6 +26,7 @@ I didn't really actually create anything special; I was able to piece together d
  1. `requestAnimationFrame` from https://gist.github.com/paulirish/1579671
  2. a cool animation wrapper by Dmitri Lau (http://www.sitepoint.com/simple-animations-using-requestanimationframe/)
  3. `jQuery`'s easing functions from https://github.com/danro/jquery-easing/blob/master/jquery.easing.js
+ 4. Robert Penners easing equations from http://robertpenner.com/easing/
 
 ## How To Use
 
