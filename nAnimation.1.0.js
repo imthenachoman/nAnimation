@@ -12,9 +12,10 @@
  * ----------------------------------------------------------------------------
  * Compressed using packer by Dean Edwards (http://dean.edwards.name/packer/) 
  * 
- * requestAnimationFrame - https://gist.github.com/paulirish/1579671
- * animations - http://www.sitepoint.com/simple-animations-using-requestanimationframe/
- * jquery easing functions - https://github.com/danro/jquery-easing/blob/master/jquery.easing.js
+ * Credits:
+ *     requestAnimationFrame - https://gist.github.com/paulirish/1579671
+ *     animations - http://www.sitepoint.com/simple-animations-using-requestanimationframe/
+ *     jquery easing functions - https://github.com/danro/jquery-easing/blob/master/jquery.easing.js
  */
 
 var nAnimate = (function()
