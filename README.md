@@ -17,7 +17,7 @@ There are a lot of great JavaScript animation libraries but all of them were eit
 
 `nAnimation` doesn't really do any kind of animation; it lets you run a **function** an **X** # of times for a **Y** duration using an **optional easing function**. The function is called on each frame and can do whatever you need/want. At each frame/call the function is passed one paramater: a `rate`. The `rate` is a number between `0` and `1` and represents the `% complete` for each frame/call. (However, it is possible that some of the easing functions will result in a number larger then 1 during the duration.) The rate will always be `0` at the first frame/call and 1 at the last frame/call.
 
-You can, in turn, use `rate` to do anything, including animations. For example, if the function sets the width of an element to be `rate * width` then the element will grow from `0` to `width` over the duration.
+You can, in turn, use `rate` to do anything, including animations. For example, if the function sets the `width` of an element to be `rate * width` then the element will grow from `0` to `width` over the duration.
 
 ## Credits
 
