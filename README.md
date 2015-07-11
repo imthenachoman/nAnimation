@@ -1,6 +1,5 @@
 # nAnimation
-
-a generic javascript animation library
+generic javascript animation library
 
 ## Overview
 
@@ -28,6 +27,7 @@ For example:
 
     nAnimate.start(1000, function(rate)
     {
+        // grow the div width from 100 to 300
         element.style.width = 100 + (rate * 200) + "px";
     });
     
