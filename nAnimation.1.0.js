@@ -12,10 +12,9 @@
  * ----------------------------------------------------------------------------
  * Compressed using packer by Dean Edwards (http://dean.edwards.name/packer/) 
  * 
- * Credits:
- *     requestAnimationFrame - https://gist.github.com/paulirish/1579671
- *     animations - http://www.sitepoint.com/simple-animations-using-requestanimationframe/
- *     jquery easing functions - https://github.com/danro/jquery-easing/blob/master/jquery.easing.js
+ * requestAnimationFrame - https://gist.github.com/paulirish/1579671
+ * animations - http://www.sitepoint.com/simple-animations-using-requestanimationframe/
+ * jquery easing functions - https://github.com/danro/jquery-easing/blob/master/jquery.easing.js
  */
 
 var nAnimate = (function()
@@ -29,15 +28,16 @@ var nAnimate = (function()
         lastTime = 0,
         vendors = ['ms', 'moz', 'webkit', 'o'];
     
-    // https://gist.github.com/paulirish/1579671
-    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x)
-    {
-        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
-        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
-    }
+    var rAF = window.requestAnimationFrame, cAF = window.cancelAnimationFrame;
     
     // https://gist.github.com/paulirish/1579671
-    if(!window.requestAnimationFrame) window.requestAnimationFrame = function(callback, element)
+    for(var x = 0; x < vendors.length && !rAF; ++x)
+    {
+        rAF = window[vendors[x]+'RequestAnimationFrame'];
+        cAF = window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
+    }
+    
+    rAF = rAF || function(callback, element)
     {
         var currTime = new Date().getTime();
         var timeToCall = Math.max(0, 16 - (currTime - lastTime));
@@ -49,8 +49,7 @@ var nAnimate = (function()
         return id;
     };
     
-    // https://gist.github.com/paulirish/1579671
-    if(!window.cancelAnimationFrame) window.cancelAnimationFrame = function(id)
+    cAF = cAF || function(id)
     {
         clearTimeout(id);
     };
@@ -248,7 +247,7 @@ var nAnimate = (function()
         // stop/cancel a running animation
         "stop" : function(id)
         {
-            cancelAnimationFrame(animationIDTracker[id]);
+            cAF(animationIDTracker[id]);
             delete animationIDTracker[id];
         },
         /*
@@ -281,7 +280,7 @@ var nAnimate = (function()
                     // find the % complete and call the action function
                     action(easingFunctions[easingFunction || defaultEasing](elapsed, 0, 1, duration));
                     // request another frame
-                    animationIDTracker[currentAnimationID] = requestAnimationFrame(step);
+                    animationIDTracker[currentAnimationID] = rAF(step);
                 }
             };
             // start it
