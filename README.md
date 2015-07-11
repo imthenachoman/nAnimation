@@ -71,4 +71,4 @@ For example:
 
 ## Example
 
-Check the `example.html` file for an example and to see how each easing function looks.
+Check http://jsfiddle.net/imthenachoman/q1tdx8s4/ or the `example.html` file for an example and to see how each easing function looks.
