@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>nAnimation by imthenachoman</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">nAnimation</h1>
+      <h2 class="project-tagline">a generic javascript animation library</h2>
+      <a href="https://github.com/imthenachoman/nAnimation" class="btn">View on GitHub</a>
+      <a href="https://github.com/imthenachoman/nAnimation/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/imthenachoman/nAnimation/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="nanimation" class="anchor" href="#nanimation" aria-hidden="true"><span class="octicon octicon-link"></span></a>nAnimation</h1>
+
+<p>generic javascript animation library</p>
+
+<h2>
+<a id="table-of-contents" class="anchor" href="#table-of-contents" aria-hidden="true"><span class="octicon octicon-link"></span></a>Table of Contents</h2>
+
+<ol>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#credits">Credits</a></li>
+<li>
+<a href="#how-to-use">How To Use</a>
+
+<ol>
+<li><a href="#to-start-an-animation">To Start An Animation</a></li>
+<li><a href="#to-end-an-animation">To End An Animation</a></li>
+<li><a href="#to-get-an-array-of-the-available-easing-functions">To Get An Array Of The Available Easing Functions</a></li>
+</ol>
+</li>
+<li><a href="#example">Example</a></li>
+</ol>
+
+<h2>
+<a id="overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h2>
+
+<p>There are a lot of great JavaScript animation libraries but all of them were either too complex or bulky for my needs. They all offered a host/slew of features that I didn't need. So I set out to write something simpler for myself. I ended up with <code>nAnimation</code>.</p>
+
+<p><code>nAnimation</code> doesn't really do any kind of animation; it lets you run a <strong>function</strong> an <strong>X</strong> # of times for a <strong>Y</strong> duration using an <strong>optional easing function</strong>. The function is called on each frame and can do whatever you need/want. At each frame/call the function is passed one paramater: a <code>rate</code>. The <code>rate</code> is a number between <code>0</code> and <code>1</code> and represents the <code>% complete</code> for each frame/call. (However, it is possible that some of the easing functions will result in a number larger then 1 during the duration.) The rate will always be <code>0</code> at the first frame/call and 1 at the last frame/call.</p>
+
+<p>You can, in turn, use <code>rate</code> to do anything, including animations. For example, if the function sets the <code>width</code> of an element to be <code>rate * width</code> then the element will grow from <code>0</code> to <code>width</code> over the duration.</p>
+
+<h2>
+<a id="credits" class="anchor" href="#credits" aria-hidden="true"><span class="octicon octicon-link"></span></a>Credits</h2>
+
+<p>I didn't really actually create anything special; I was able to piece together different things I found online to do what I need. The resources I used:</p>
+
+<ol>
+<li>
+<code>requestAnimationFrame</code> from <a href="https://gist.github.com/paulirish/1579671">https://gist.github.com/paulirish/1579671</a>
+</li>
+<li>a cool animation wrapper by Dmitri Lau (<a href="http://www.sitepoint.com/simple-animations-using-requestanimationframe/">http://www.sitepoint.com/simple-animations-using-requestanimationframe/</a>)</li>
+<li>
+<code>jQuery</code>'s easing functions from <a href="https://github.com/danro/jquery-easing/blob/master/jquery.easing.js">https://github.com/danro/jquery-easing/blob/master/jquery.easing.js</a>
+</li>
+<li>Robert Penners easing equations from <a href="http://robertpenner.com/easing/">http://robertpenner.com/easing/</a>
+</li>
+</ol>
+
+<h2>
+<a id="how-to-use" class="anchor" href="#how-to-use" aria-hidden="true"><span class="octicon octicon-link"></span></a>How To Use</h2>
+
+<h3>
+<a id="to-start-an-animation" class="anchor" href="#to-start-an-animation" aria-hidden="true"><span class="octicon octicon-link"></span></a>To Start An Animation</h3>
+
+<pre><code>nAnimate.start([duration in milliseconds], [function to call with the % complete], [(optional) name of the easing function to use]);
+</code></pre>
+
+<p>For example:</p>
+
+<pre><code>nAnimate.start(1000, function(rate)
+{
+    // grow the div width from 100 to 300
+    element.style.width = 100 + (rate * 200) + "px";
+});
+
+nAnimate.start(2000, function(rate)
+{
+    element.style.height = 100 + (rate * 200) + "px";
+}, "easeInQuart");
+</code></pre>
+
+<h3>
+<a id="to-end-an-animation" class="anchor" href="#to-end-an-animation" aria-hidden="true"><span class="octicon octicon-link"></span></a>To End An Animation</h3>
+
+<p><code>nAnimate.start</code> will return an <code>ID</code>. Use the <code>ID</code> to cancel.</p>
+
+<pre><code>nAnimate.stop([ID]);
+</code></pre>
+
+<p>For example:</p>
+
+<pre><code>var ID = nAnimate.start(1000, function(rate)
+{
+    element.style.width = 100 + (rate * 200) + "px";
+});
+
+nAnimate.stop(ID);
+</code></pre>
+
+<h3>
+<a id="to-get-an-array-of-the-available-easing-functions" class="anchor" href="#to-get-an-array-of-the-available-easing-functions" aria-hidden="true"><span class="octicon octicon-link"></span></a>To Get An Array Of The Available Easing Functions</h3>
+
+<pre><code>nAnimate.easingFunctions();
+</code></pre>
+
+<p>For example:</p>
+
+<pre><code>var easingFunctions = nAnimate.easingFunctions();
+</code></pre>
+
+<h2>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h2>
+
+<p>Check <a href="http://jsfiddle.net/imthenachoman/q1tdx8s4/">http://jsfiddle.net/imthenachoman/q1tdx8s4/</a> or the <code>example.html</code> file for an example and to see how each easing function looks.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/imthenachoman/nAnimation">nAnimation</a> is maintained by <a href="https://github.com/imthenachoman">imthenachoman</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
+
