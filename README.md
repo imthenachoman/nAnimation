@@ -6,9 +6,10 @@ generic javascript animation library
  1. [Overview](#overview)
  2. [Credits](#credits)
  3. [How To Use](#how-to-use)
-	 1. [To Start An Animation](#to-start-an-animation)
-	 2. [To End An Animation](#to-end-an-animation)
-	 3. [To Get An Array Of The Available Easing Functions](#to-get-an-array-of-the-available-easing-functions)
+         1. [CDN](#cdn)
+	 2. [To Start An Animation](#to-start-an-animation)
+	 3. [To End An Animation](#to-end-an-animation)
+	 4. [To Get An Array Of The Available Easing Functions](#to-get-an-array-of-the-available-easing-functions)
  4. [Example](#example)
 
 ## Overview
@@ -29,6 +30,11 @@ I didn't really actually create anything special; I was able to piece together d
  4. Robert Penners easing equations from http://robertpenner.com/easing/
 
 ## How To Use
+
+### CDN
+
+ - http://imthenachoman.github.io/nAnimation/nAnimation.1.0.min.js
+ - http://imthenachoman.github.io/nAnimation/nAnimation.1.0.js
 
 ### To Start An Animation
 
