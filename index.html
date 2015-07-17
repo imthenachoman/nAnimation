@@ -8,8 +8,67 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+            <style type="text/css">
+            table
+            {
+                width: 75%;
+            }
+            .box
+            {
+                width: 0%;
+                height: 20px;
+                background-color: red;
+            }
+        </style>
+        <script type="text/javascript" src="http://imthenachoman.github.io/nAnimation/nAnimation.1.0.min.js"></script>
+        <script type="text/javascript">
+            function init()
+            {
+                var easingFunctions = nAnimate.easingFunctions();
+                var table = document.getElementById("table");
+                
+                for(var i = 0; i < easingFunctions.length; ++i)
+                {
+                    table.innerHTML += "<tr><th><a href='#' onclick='animateRow(this); return false;'>" + easingFunctions[i] + "</a></th><td style='width: 100%;'><div class='box'></div></td></tr>";
+                }
+            }
+            
+            function animateAllRows()
+            {
+                var rows = document.getElementById("table").rows;
+                var toAnimate = {};
+                for(var i = 0; i < rows.length; ++i)
+                {
+                    var easingFunction = rows[i].cells[0].innerText;
+                    var div = rows[i].cells[1].querySelector(".box");
+                    div.style.width = "0%";
+                    toAnimate[easingFunction] = div;
+                }
+                
+                for(i in toAnimate)
+                {
+                    animateBox(toAnimate[i], i);
+                }
+            }
+            
+            function animateBox(div, easingFunction)
+            {
+                nAnimate.start(1000, function(rate)
+                {
+                    div.style.width = (rate * 100) + "%";
+                }, easingFunction);
+            }
+            
+            function animateRow(a)
+            {
+                var easingFunction = a.innerText;
+                var div = a.parentNode.nextSibling.children[0];
+                div.style.width = "0%";
+                animateBox(div, easingFunction);
+            }
+        </script>
   </head>
-  <body>
+  <body onload="init()">
     <section class="page-header">
       <h1 class="project-name">nAnimation</h1>
       <h2 class="project-tagline">a generic javascript animation library</h2>
@@ -124,7 +183,9 @@ nAnimate.stop(ID);
 <a id="example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h2>
 
 <p>
-  sadfasdfa<br />
+  input type="button" style="width: 100%;" onclick="animateAllRows()" value="animate all rows"></input>
+  <br /><br />
+<table border="1"><tbody id="table"></tbody></table>  
   Check <a href="http://jsfiddle.net/imthenachoman/q1tdx8s4/">http://jsfiddle.net/imthenachoman/q1tdx8s4/</a> or the <code>example.html</code> file for an example and to see how each easing function looks.
   
 </p>
