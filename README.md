@@ -1,6 +1,8 @@
 # nAnimation
 generic javascript animation library
 
+http://imthenachoman.github.io/nAnimation/
+
 ## Table of Contents
 
  1. [Overview](#overview)
