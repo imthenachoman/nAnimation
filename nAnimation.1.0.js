@@ -293,7 +293,7 @@ var nAnimate = (function()
         "easingFunctions" : function()
         {
             var ret = [];
-            for(easingName in easingFunctions)
+            for(var easingName in easingFunctions)
             {
                 ret.push(easingName);
             }
